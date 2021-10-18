@@ -5,6 +5,7 @@ import TodoInput from '../components/TodoInput';
 
 function Initialize() {
   const [todo, setTodo] = useState([]);
+  const [editItem, setEditItem] = useState({});
 
   const getTheTodos = async () => {
     const retrievedTodo = await getTodos();
@@ -14,9 +15,9 @@ function Initialize() {
 
   return (
     <div className="App">
-      <TodoInput />
+      <TodoInput setTodo={setTodo} obj={editItem} setEditItem={setEditItem} />
       {
-        todo.map((todos) => <Todo key={todos.name} todo={todos} />)
+        todo.map((todos) => <Todo key={todos.firebaseKey} todo={todos} setTodo={setTodo} setEditItem={setEditItem} />)
       }
     </div>
   );

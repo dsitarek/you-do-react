@@ -1,28 +1,58 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { createTodo } from '../data/todoData';
+import { createTodo, updateTodo } from '../data/todoData';
 
-export default function TodoInput({ obj }) {
-  const [formInput, setFormInput] = useState({
-    name: obj?.name || '',
-  });
+const initialState = {
+  name: '',
+  complete: false,
+  uid: '',
+};
+export default function TodoInput({ obj, setTodo, setEditItem }) {
+  const [formInput, setFormInput] = useState(initialState);
 
   const handleChange = (e) => {
     setFormInput((prevState) => ({ ...prevState, [e.target.name]: e.target.value }));
   };
 
+  useEffect(() => {
+    if (obj.firebaseKey) {
+      setFormInput({
+        name: obj.name,
+        firebaseKey: obj.firebaseKey,
+        complete: obj.complete,
+        date: obj.date,
+        uid: obj.uid,
+      });
+    }
+  }, [obj]);
+
+  const resetForm = () => {
+    setFormInput(initialState);
+    setEditItem({});
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    createTodo(formInput);
+    if (obj.firebaseKey) {
+      updateTodo(obj.firebaseKey, formInput).then((todos) => {
+        setTodo(todos);
+        resetForm();
+      });
+    } else {
+      createTodo({ ...formInput, date: new Date() }).then((todos) => {
+        setTodo(todos);
+        resetForm();
+      });
+    }
   };
 
   return (
     <div className="formContainer">
-      <form>
-        <label htmlFor="name">Name
-          <input type="text" id="name" name="name" defaultValue={formInput.name} onChange={handleChange} required />
+      <form onSubmit={handleSubmit}>
+        <label htmlFor="name">Name:
+          <input type="text" id="name" name="name" value={formInput.name} onChange={handleChange} required />
         </label>
-        <button type="submit" onClick={handleSubmit}>Submit</button>
+        <button type="submit">{obj.firebaseKey ? 'Update' : 'Submit'}</button>
       </form>
     </div>
   );
@@ -31,7 +61,13 @@ export default function TodoInput({ obj }) {
 TodoInput.propTypes = {
   obj: PropTypes.shape({
     name: PropTypes.string,
+    firebaseKey: PropTypes.string,
+    complete: PropTypes.bool,
+    date: PropTypes.string,
+    uid: PropTypes.string,
   }),
+  setTodo: PropTypes.func.isRequired,
+  setEditItem: PropTypes.func.isRequired,
 };
 
 TodoInput.defaultProps = { obj: {} };
