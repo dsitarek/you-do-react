@@ -9,5 +9,7 @@
 - As a user, when you press complete, you will no longer see the item
 - As a user, you can delete a YOU-DO by pressing a red button that reads "DELETE"
 
+![you-do-img](https://user-images.githubusercontent.com/82732748/137996155-17b5a6b1-ad15-4c8e-a2f9-81ed8a93ac7e.png)
+
 ## Contributors:
 - [Daniel Sitarek](https://github.com/dsitarek)
