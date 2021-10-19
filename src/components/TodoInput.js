@@ -47,12 +47,10 @@ export default function TodoInput({ obj, setTodo, setEditItem }) {
   };
 
   return (
-    <div className="formContainer">
+    <div className="form-container">
       <form onSubmit={handleSubmit}>
-        <label htmlFor="name">Name:
-          <input type="text" id="name" name="name" value={formInput.name} onChange={handleChange} required />
-        </label>
-        <button type="submit">{obj.firebaseKey ? 'Update' : 'Submit'}</button>
+        <input type="text" id="todoInput" name="name" value={formInput.name} onChange={handleChange} required placeholder="Add a Todo" />
+        <button type="submit" className="btn btn-success">{obj.firebaseKey ? 'Update' : 'Submit'}</button>
       </form>
     </div>
   );

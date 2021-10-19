@@ -14,11 +14,14 @@ function Initialize() {
   useEffect(() => { getTheTodos(); }, []);
 
   return (
-    <div className="App">
+    <div className="app">
+      <h1 className="title">YOU-DO!</h1>
       <TodoInput setTodo={setTodo} obj={editItem} setEditItem={setEditItem} />
-      {
+      <div className="todo-container">
+        {
         todo.map((todos) => <Todo key={todos.firebaseKey} todo={todos} setTodo={setTodo} setEditItem={setEditItem} />)
       }
+      </div>
     </div>
   );
 }
