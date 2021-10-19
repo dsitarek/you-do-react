@@ -17,10 +17,12 @@ export default function Todo({ todo, setTodo, setEditItem }) {
       {todo.complete !== true
         ? (
           <Alert color="light">
-            <button type="button" className="btn btn-success" onClick={() => handleClick('complete')}>Complete</button>
-            <button type="button" className="btn btn-info" onClick={() => setEditItem(todo)}>Edit</button>
-            {todo.name}
-            <button type="button" className="btn btn-danger" onClick={() => handleClick('delete')}>Delete</button>
+            <div className="todo-body">
+              <button type="button" className="btn btn-success" onClick={() => handleClick('complete')}>Complete</button>
+              <div className="todo-name">{todo.name}</div>
+              <button type="button" className="btn btn-info" onClick={() => setEditItem(todo)}>Edit</button>
+              <button type="button" className="btn btn-danger" onClick={() => handleClick('delete')}>Delete</button>
+            </div>
           </Alert>
         ) : ''}
     </>

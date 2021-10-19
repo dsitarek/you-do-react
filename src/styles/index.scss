@@ -2,5 +2,58 @@
 @import 'globals';
 
 body {
-  background-color: $favColor !important;
+  background-color: rgb(54, 54, 54) !important;
+}
+
+.app {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.todo-container {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 40%;
+}
+
+.form-container {
+  margin-top: 1em;
+  border: 1px transparent;
+  border-radius: 6px;
+  margin-bottom: 2em;
+  display: flex;
+  width: 40%;
+  justify-content: center;
+}
+
+.todo-body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.todo-name {
+  flex-basis: 60%;
+  font-weight: bold;
+}
+
+.form-container form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+#todoInput {
+  margin-right: 1em;
+  flex-grow: 2;
+  border: 1px transparent;
+  border-radius: 4px;
+  padding-left: .5em;
+}
+
+.title {
+  color: white;
+  margin-top: 1em;
+  font-size: 3em;
 }
